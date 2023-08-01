@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>about page</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div class="my-card">
+
+                    <form th:method="post" th:action="@{/do-login}">
+                        <div class="text-center">
+                            <h1>Login Here</h1>
+
+                            <div th:if="${param.error}" class="alert alert-danger">
+                                Invalid email or password
+                            </div>
+
+                            <div th:if="${param.logout}" class="alert alert-success">
+                                Successfully logged out
+                            </div>
+
+                            <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert text-center">
+                                <p th:text="${session.message.content}"></p>
+                                <th:block th:text="${@sessionHelper.sessionRemove()}"></th:block>
+                            </div>
+                        </div>
+
+                        <!--              email field-->
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input name="username" type="email" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp">
+                        </div>
+
+                        <!--              password field-->
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+
+                        <div class="container text-center">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+
+                        <div class="text-right">
+                            <a class="text-info" href="/signup">Register here</a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

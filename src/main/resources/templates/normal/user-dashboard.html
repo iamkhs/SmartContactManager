@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+<section>
+    <h1>Welcome, You are normal user...</h1>
+    <h1>This is your private dashboard</h1>
+    <div class="container mt-5 text-center">
+        <h2>Your name : <span th:text="${user}"></span></h2>
+        <a href="/logout">
+            <button type="submit" class="btn btn-primary">Logout</button>
+        </a>
+
+    </div>
+</section>
+
+</body>
+</html>

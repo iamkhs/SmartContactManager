@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Register page</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+
+                <div class="my-card">
+
+                    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert text-center">
+                        <p th:text="${session.message.content}"></p>
+                        <th:block th:text="${@sessionHelper.sessionRemove()}"></th:block>
+                    </div>
+
+                    <h1 class="text-center">Signup Here</h1>
+
+                    <form th:method="post" th:action="@{user/form-process}" th:object="${user}">
+
+                        <!--          name field-->
+                        <div class="mb-3">
+                            <label for="nameField" class="form-label">Name</label>
+                            <input name="name" type="text" class="form-control" id="nameField"
+                                   aria-describedby="nameHelp" required
+                                   th:value="${user.name}">
+                        </div>
+
+
+                        <!--          email field-->
+                        <div class="mb-3">
+                            <label for="emailField" class="form-label">Email address</label>
+                            <input name="email" type="email" class="form-control" id="emailField"
+                                   aria-describedby="emailHelp" required
+                                   th:value="${user.email}">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+
+                        <!--          password field-->
+                        <div class="mb-3">
+                            <label for="passwordField" class="form-label">Password</label>
+                            <input name="password" type="password" class="form-control"
+                                   th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
+                                   id="passwordField" required>
+                            <div class="invalid-feedback" th:each="e : ${#fields.errors('password')}" th:text="${e}">
+                            </div>
+                        </div>
+
+                        <!--          confirm password field-->
+                        <div class="mb-3">
+                            <label for="confirmPasswordField" class="form-label">Confirm Password</label>
+                            <input name="confirmPassword" type="password" class="form-control"
+                                   th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
+                                   id="confirmPasswordField" required>
+
+                            <div class="invalid-feedback" th:each="e : ${#fields.errors('confirmPassword')}"
+                                 th:text="${e}">
+                            </div>
+                        </div>
+
+
+                        <!--          about field-->
+                        <div class="mb-3">
+                            <label for="aboutField" class="form-label">About</label>
+                            <textarea name="about" rows="3" class="form-control" id="aboutField"
+                                      placeholder="Tell something about you." required
+                                      th:value="${user.about}"></textarea>
+                        </div>
+
+
+                        <!--            checkbox-->
+                        <div class="form-group form-check">
+                            <input name="agreement" type="checkbox" class="form-check-input" id="exampleCheck1"
+                                   required>
+                            <label class="form-check-label" for="exampleCheck1">I agree to the <a target="_blank"
+                                                                                                  href="https://www.github.com">Terms
+                                & Conditions</a> </label>
+                        </div>
+
+                        <!--            submit button-->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+</body>
+</html>
